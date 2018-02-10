@@ -6,6 +6,8 @@ from models.user import UserModel
 class UserRegister(Resource):
     parser = reqparse.RequestParser()
 
+# adding a comment to test build
+
     parser.add_argument('username',
         type=str,
         required=True,
