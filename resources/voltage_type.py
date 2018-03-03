@@ -21,10 +21,7 @@ class VoltageType(Resource):
         if VoltageTypeModel.find_by_name(name):
             return {"message": "A a voltage_type with name '{}' already exists".format(name)}, 400
 
-        data = voltage_type.parser.parse_args()
-
-        voltage_type = VoltageTypeModel(name, **data)
-
+        voltage_type = VoltageTypeModel(name)
         try:
             voltage_type.save_to_db()
         except:
