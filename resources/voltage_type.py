@@ -4,26 +4,26 @@ from models.voltage_type import VoltageTypeModel
 
 class VoltageType(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('voltage_name',
+    parser.add_argument('name',
         type=str,
         required=True,
         help="This field cannot be left blank!"
     )
 
     @jwt_required()
-    def get(self, voltage_name):
-        voltage_type = VoltageTypeModel.find_by_name(voltage_name)
+    def get(self, name):
+        voltage_type = VoltageTypeModel.find_by_name(name)
         if voltage_type:
             return voltage_type.json()
         return {'message':'voltage_type not found'}, 404
 
-    def post(self, voltage_name):
-        if VoltageTypeModel.find_by_name(voltage_name):
-            return {"message": "A a voltage_type with name '{}' already exists".format(voltage_name)}, 400
+    def post(self, name):
+        if VoltageTypeModel.find_by_name(name):
+            return {"message": "A a voltage_type with name '{}' already exists".format(name)}, 400
 
         data = voltage_type.parser.parse_args()
 
-        voltage_type = VoltageTypeModel(voltage_name, **data)
+        voltage_type = VoltageTypeModel(name, **data)
 
         try:
             voltage_type.save_to_db()
@@ -32,25 +32,25 @@ class VoltageType(Resource):
 
         return voltage_type.json(), 201
 
-    def delete(self, voltage_name):
-        voltage_type = VoltageTypeModel.find_by_name(voltage_name)
+    def delete(self, name):
+        voltage_type = VoltageTypeModel.find_by_name(name)
         if voltage_type:
             voltage_type.delete_from_db()
 
         return {'message': 'Voltage Type deleted'}
 
-    def put(self, voltage_name):
+    def put(self, name):
         data = VoltageType.parser.parse_args()
 
         # We first see if the the item already exists by name
-        voltage_type = VoltageTypeModel.find_by_name(voltage_name)
+        voltage_type = VoltageTypeModel.find_by_name(name)
 
         if voltage_type is None:
             # Item doesn't exist so we create a new object
-            voltage_type = VoltageTypeModel(voltage_name, **data)
+            voltage_type = VoltageTypeModel(name, **data)
         else:
             # item does exist so we just need to update the price & the store id
-            voltage_type.voltage_name = data['voltage_name']
+            voltage_type.name = data['name']
 
         # The save_to_db() will then either insert or update the database
         voltage_type.save_to_db()
