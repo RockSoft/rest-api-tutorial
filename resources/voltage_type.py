@@ -1,35 +1,35 @@
 from flask_restful import Resource
-from models.store import StoreModel
+from models.voltage_type import VoltageTypeModel
 
-class Store(Resource):
+class VoltageType(Resource):
 
-    def get(self, name):
-        store = StoreModel.find_by_name(name)
+    def get(self, voltage_name):
+        voltage_type = VoltageTypeModel.find_by_name(voltage_name)
 
-        if store:
-            return store.json()
-        return {'message': 'Store not found'}, 404
+        if voltage_type:
+            return voltage_type.json()
+        return {'message': 'Voltage type not found'}, 404
 
-    def post(self, name):
-        if StoreModel.find_by_name(name):
-            return {'message': "Store with name '{}' already exists".format(name)},400
+    def post(self, voltage_name):
+        if VoltageTypeModel.find_by_name(voltage_name):
+            return {'message': "Voltage type with name '{}' already exists".format(voltage_name)},400
 
-        store = StoreModel(name)
+        voltage_type = VoltageTypeModel(voltage_name)
         try:
-            store.save_to_db()
+            voltage_type.save_to_db()
         except:
-            return {'message': 'An error occurred while creating the store.'}, 500
+            return {'message': 'An error occurred while creating the voltage type.'}, 500
 
-        return store.json(), 201
+        return voltage_type.json(), 201
 
-    def delete(self, name):
-        store = StoreModel.find_by_name(name)
-        if store:
-            store.delete_from_db()
+    def delete(self, voltage_name):
+        voltage_type = VoltageTypeModel.find_by_name(voltage_name)
+        if voltage_type:
+            voltage_type.delete_from_db()
 
-        return {'message': 'Store deleted'}
+        return {'message': 'voltage type deleted'}
 
 
-class StoreList(Resource):
+class VoltageTypeList(Resource):
     def get(self):
-        return {'stores': [store.json() for store in StoreModel.query.all()]}
+        return {'voltagetypes': [voltagetype.json() for voltagetype in VoltageTypeModel.query.all()]}
