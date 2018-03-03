@@ -29,7 +29,7 @@ class VoltageType(Resource):
 
         return vt.json(), 201
 
-    def delete(self, name):
+    def delete(self, voltage_name):
         voltage_type = VoltageTypeModel.find_by_name(voltage_name)
         if voltage_type:
             voltage_type.delete_from_db()
