@@ -16,12 +16,12 @@ class VoltageType(Resource):
             return voltage_type.json()
         return {'message':'voltage_type not found'}, 404
 
-    def post(self, name):
-        if VoltageTypeModel.find_by_name(name):
-            return {"message": "A a voltage_type with name '{}' already exists".format(name)}, 400
+    def post(self, voltage_name):
+        if VoltageTypeModel.find_by_name(voltage_name):
+            return {"message": "A a voltage_type with name '{}' already exists".format(voltage_name)}, 400
 
         voltage_type = VoltageTypeModel(voltage_name)
-        try:
+        try
             voltage_type.save_to_db()
         except:
             return {'message': 'An error occurred inserting the voltage_type'}, 500 #internal server error
