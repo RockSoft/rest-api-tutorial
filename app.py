@@ -8,6 +8,7 @@ from security import authenticate, identity as identity_function
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+from resources.voltage_type import VoltageType, VoltageTypeList
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
@@ -27,8 +28,10 @@ def customized_response_handler(access_token, identity):
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(Store, '/store/<string:name>')
+api.add_resource(VoltageType, 'voltagetype/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(StoreList, '/stores')
+api.add_resource(VoltageTypeList, '/voltagetypes')
 
 
 if __name__ == '__main__':
