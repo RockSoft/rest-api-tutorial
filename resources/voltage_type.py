@@ -5,7 +5,7 @@ from models.voltage_type import VoltageTypeModel
 class VoltageType(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('voltage_name',
-        type=string,
+        type=str,
         required=True,
         help="This field cannot be left blank!"
     )
