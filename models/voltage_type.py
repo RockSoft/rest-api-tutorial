@@ -4,17 +4,17 @@ class VoltageTypeModel(db.Model):
     __tablename__ = 'voltage_type'
 
     voltage_type_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
+    voltage_name = db.Column(db.String(80))
 
     def __init__(self, name):
-        self.name = name
+        self.voltage_name = name
 
     def json(self):
-        return {'name': self.name}
+        return {'voltage_name': self.voltage_name}
 
     @classmethod
-    def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
+    def find_by_name(cls, voltage_name):
+        return cls.query.filter_by(voltage_name=voltage_name).first()
 
     @classmethod
     def find_by_id(cls, voltage_type_id):
