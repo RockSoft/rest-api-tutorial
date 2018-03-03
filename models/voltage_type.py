@@ -16,10 +16,6 @@ class VoltageTypeModel(db.Model):
     def find_by_name(cls, voltage_name):
         return cls.query.filter_by(voltage_name=voltage_name).first()
 
-    @classmethod
-    def find_by_id(cls, voltage_type_id):
-        return cls.query.filter_by(voltage_type_id=voltage_type_id).first()
-
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
