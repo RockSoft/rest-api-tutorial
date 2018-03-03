@@ -6,8 +6,8 @@ class VoltageTypeModel(db.Model):
     voltage_type_id = db.Column(db.Integer, primary_key=True)
     voltage_name = db.Column(db.String(80))
 
-    def __init__(self, name):
-        self.voltage_name = name
+    def __init__(self, voltage_name):
+        self.voltage_name = voltage_name
 
     def json(self):
         return {'voltage_name': self.voltage_name}
