@@ -11,10 +11,13 @@ from resources.store import Store, StoreList
 from resources.voltage_type import VoltageType, VoltageTypeList
 
 app = Flask(__name__)
+print("This is my database url: %s" % os.environ(DATABASE_URL))
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'peter'
 api = Api(app)
+
 
 jwt = JWT(app, authenticate, identity_function) #/auth
 
