@@ -10,7 +10,7 @@ class VoltageTypeModel(db.Model):
         self.voltage_name = voltage_name
 
     def json(self):
-        return {'voltage_name': self.voltage_name}
+        return {'voltage_type_id': self.voltage_type_id, 'voltage_name': self.voltage_name}
 
     @classmethod
     def find_by_name(cls, voltage_name):
