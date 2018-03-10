@@ -30,7 +30,7 @@ def customized_response_handler(access_token, identity):
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(Store, '/store/<string:name>')
-api.add_resource(VoltageType, '/voltagetype/<string:voltage_name>')
+api.add_resource(VoltageType, '/voltagetype/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(StoreList, '/stores')
 api.add_resource(VoltageTypeList, '/voltagetypes')
