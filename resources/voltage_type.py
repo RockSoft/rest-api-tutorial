@@ -32,4 +32,4 @@ class VoltageType(Resource):
 
 class VoltageTypeList(Resource):
     def get(self):
-        return {'voltagetypes': [voltagetype.json() for voltagetype in VoltageTypeModel.query.all()]}
+        return {'voltage_types': [voltagetype.json() for voltagetype in VoltageTypeModel.query.all()]}
